@@ -20,7 +20,7 @@ class FilmValidatorTest {
         film.setId(100L);
         film.setName("Shrek");
         film.setDescription("Сartoon");
-        film.setReleaseDate(LocalDate.parse("2004-11-11"));
+        film.setReleaseDate(LocalDate.parse("1998-11-02"));
         film.setDuration(215);
     }
 
@@ -56,11 +56,11 @@ class FilmValidatorTest {
     @Test
     void testValidateReleaseDate() {
         assertDoesNotThrow(() -> validate(film));
-        film.setReleaseDate(LocalDate.parse("1998-11-01"));
+        film.setReleaseDate(LocalDate.parse("1895-12-27"));
         assertThrows(FilmValidatorException.class, () -> validate(film));
-        film.setReleaseDate(LocalDate.parse("1998-11-02"));
+        film.setReleaseDate(LocalDate.parse("1895-12-28"));
         assertDoesNotThrow(() -> validate(film));
-        film.setReleaseDate(LocalDate.parse("1998-11-03"));
+        film.setReleaseDate(LocalDate.parse("1895-12-29"));
         assertDoesNotThrow(() -> validate(film));
     }
 
