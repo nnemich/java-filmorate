@@ -17,9 +17,6 @@ public class FilmValidatorException extends ValidatorException {
                 + "Продолжительность фильма должна быть положительной.";
     }
 
-    public FilmValidatorException() {
-    }
-
     public FilmValidatorException(String message) {
         super(message);
     }
