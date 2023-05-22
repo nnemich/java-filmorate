@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.exception.service.user.UserLogicException;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
+import ru.yandex.practicum.filmorate.storage.Storage;
 import ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundException;
 
 import java.util.Collection;
@@ -19,10 +19,10 @@ import static ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundE
 @Slf4j
 @Service
 public class UserService {
-    private final UserStorage userStorage;
+    private final Storage<User> userStorage;
 
     @Autowired
-    public UserService(UserStorage userStorage) {
+    public UserService(Storage<User> userStorage) {
         log.debug("UserService({}).", userStorage.getClass().getSimpleName());
         this.userStorage = userStorage;
         log.info("Подключена зависимость: {}.", userStorage.getClass().getName());

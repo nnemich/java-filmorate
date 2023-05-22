@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.exception.storage.user.UserAlreadyExistsException;
 import ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundException;
+import ru.yandex.practicum.filmorate.storage.Storage;
 
 import java.util.*;
 
@@ -15,7 +16,7 @@ import static ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundE
 
 @Slf4j
 @Component
-public class InMemoryUserStorage implements UserStorage {
+public class InMemoryUserStorage implements Storage<User> {
     private final Map<Long, User> userStorage = new HashMap<>();
     private long uniqueUserID = 1;
 

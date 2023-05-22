@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.exception.storage.film.FilmAlreadyExistsException;
 import ru.yandex.practicum.filmorate.exception.storage.film.FilmNotFoundException;
+import ru.yandex.practicum.filmorate.storage.Storage;
 
 import javax.validation.ValidationException;
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ import static ru.yandex.practicum.filmorate.exception.storage.film.FilmNotFoundE
 
 @Slf4j
 @Component
-public class InMemoryFilmStorage implements FilmStorage {
+public class InMemoryFilmStorage implements Storage<Film> {
     private final Map<Long, Film> storage = new HashMap<>();
     private long uniqueFilmID = 1;
 

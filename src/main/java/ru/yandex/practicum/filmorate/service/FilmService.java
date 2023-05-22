@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
+import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.storage.Storage;
 import ru.yandex.practicum.filmorate.exception.storage.film.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.exception.storage.film.LikeAlreadyExistsException;
 import ru.yandex.practicum.filmorate.exception.storage.film.LikeNotFoundException;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 import ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundException;
 
 import java.util.Collection;
@@ -24,17 +24,17 @@ import static ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundE
 @Slf4j
 @Service
 public class FilmService {
-    private final FilmStorage filmStorage;
-    private final UserStorage userStorage;
+    private final Storage<Film> filmStorage;
+    private final Storage<User> userStorage;
 
     @Autowired
-    public FilmService(FilmStorage filmStorage, UserStorage userStorage) {
+    public FilmService(Storage<Film> filmStorage, Storage<User> userStorage) {
+        this.filmStorage = filmStorage;
+        this.userStorage = userStorage;
         log.debug("FilmService({}, {})",
                 filmStorage.getClass().getSimpleName(),
                 userStorage.getClass().getSimpleName());
-        this.filmStorage = filmStorage;
         log.info("Подключена зависимость: {}.", filmStorage.getClass().getName());
-        this.userStorage = userStorage;
         log.info("Подключена зависимость: {}.", userStorage.getClass().getName());
     }
 
