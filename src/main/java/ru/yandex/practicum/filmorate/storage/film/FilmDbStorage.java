@@ -95,8 +95,10 @@ public class FilmDbStorage implements FilmStorage {
     public Collection<Film> getAll() {
         log.debug("getAll().");
         List<Film> films = jdbcTemplate.query(""
-                + "SELECT film_id, name, description, release_date, duration_in_minutes, mpa_rating_id "
-                + "FROM films", new FilmMapper());
+                + "SELECT film_id, f.name, description, release_date, duration_in_minutes, mpa.mpa_rating_id," +
+                  "mpa.name as mpa_name "
+                + "FROM films as f " +
+                  "INNER JOIN mpa_ratings AS mpa ON f.mpa_rating_id = mpa.mpa_rating_id", new MakeFilm());
         log.trace("Возвращены все фильмы: {}.", films);
         return films;
     }
@@ -166,6 +168,23 @@ public class FilmDbStorage implements FilmStorage {
             Mpa mpa = new Mpa();
             mpa.setId(rs.getInt("mpa_rating_id"));
 
+            Film film = new Film();
+            film.setId(rs.getLong("film_id"));
+            film.setName(rs.getString("name"));
+            film.setDescription(rs.getString("description"));
+            film.setReleaseDate(rs.getDate("release_date").toLocalDate());
+            film.setDuration(rs.getInt("duration_in_minutes"));
+            film.setMpa(mpa);
+            return film;
+        }
+    }
+
+    private static class MakeFilm implements RowMapper<Film> {
+        @Override
+        public Film mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Mpa mpa = new Mpa();
+            mpa.setId(rs.getInt("mpa_rating_id"));
+            mpa.setName(rs.getString("mpa_name"));
             Film film = new Film();
             film.setId(rs.getLong("film_id"));
             film.setName(rs.getString("name"));
