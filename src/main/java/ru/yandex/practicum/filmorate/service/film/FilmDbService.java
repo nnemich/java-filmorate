@@ -34,7 +34,7 @@ import static ru.yandex.practicum.filmorate.exception.storage.film.LikeNotFoundE
 import static ru.yandex.practicum.filmorate.exception.storage.user.UserNotFoundException.USER_NOT_FOUND;
 
 @Slf4j
-@Service("FilmDbService")
+@Service
 public class FilmDbService implements FilmService {
     private final FilmStorage filmStorage;
     private final UserStorage userStorage;
@@ -99,7 +99,7 @@ public class FilmDbService implements FilmService {
 
     @Override
     public Collection<Film> getAll() {
-        var films = filmStorage.getAll();
+        Collection<Film> films = filmStorage.getAll();
         for (Film film : films) {
             film.setGenres(filmStorage.getGenres(film.getId()));
             film.setMpa(mpaDao.get(film.getMpa().getId()));
