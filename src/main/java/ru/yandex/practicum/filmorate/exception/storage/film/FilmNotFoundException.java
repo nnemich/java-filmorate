@@ -1,8 +1,8 @@
 package ru.yandex.practicum.filmorate.exception.storage.film;
 
-import ru.yandex.practicum.filmorate.exception.storage.ElementNotFoundException;
+import ru.yandex.practicum.filmorate.exception.storage.NotFoundException;
 
-public class FilmNotFoundException extends ElementNotFoundException {
+public class FilmNotFoundException extends NotFoundException {
     public static final String FILM_NOT_FOUND = "Фильм filmID_%d не найден";
 
     public FilmNotFoundException(String message) {

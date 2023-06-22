@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.storage;
 
 import java.util.Collection;
-import java.util.Map;
 
 public interface Storage<T> {
     /**
@@ -43,5 +42,5 @@ public interface Storage<T> {
      *
      * @return внутрение хранилище
      */
-    Map<Long, T> getStorage();
+    boolean contains(long elementID);
 }

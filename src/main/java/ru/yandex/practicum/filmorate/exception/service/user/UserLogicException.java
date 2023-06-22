@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.exception.service.user;
 
-import ru.yandex.practicum.filmorate.exception.service.ServiceException;
-
-public class UserLogicException extends ServiceException {
+public class UserLogicException extends RuntimeException {
     public static final String UNABLE_TO_ADD_YOURSELF =
             "Пользователь userID_%d не может добавить сам себя в друзья";
     public static final String UNABLE_TO_DELETE_YOURSELF =
